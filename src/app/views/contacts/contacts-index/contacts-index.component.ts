@@ -31,18 +31,23 @@ export class ContactsIndexComponent implements OnInit {
   filterContact(keyword: string): void {
     if (!keyword) {
       this.hightLightText = '';
+      this.contactsFacade.searchText('');
       this.newContacts$ = this.contacts$;
       return;
     }
 
+
     this.hightLightText = keyword;
     const keywordFormatted = keyword.toLowerCase();
+    this.contactsFacade.searchText(keywordFormatted);
+
     this.newContacts$ = this.contacts$.pipe(
       map(results => results.filter(
         item => item.first_name.toLowerCase().includes(keywordFormatted)
           || item.last_name.toLowerCase().includes(keywordFormatted)
           || item.email.toLowerCase().includes(keywordFormatted)
       )),
+      tap( contacts =>    this.contactsFacade.filterResult(contacts)),
       catchError(e => {
         return of([]);
       })

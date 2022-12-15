@@ -4,7 +4,7 @@ import {createReducer, on} from '@ngrx/store';
 import {
   createSuccess,
   loadAllSuccess,
-  loadSuccess, removeSuccess,
+  loadSuccess, remove, removeSuccess,
   updateSuccess
 } from '@app/contacts-store/contacts-actions';
 
@@ -47,6 +47,11 @@ export const reducer = createReducer<State>(
   on(updateSuccess, (state, {contact}) =>
     contactsAdapter.updateOne({id: contact.id, changes: contact}, state)
   ),
+
+  on(remove, (state, {id}) =>
+    contactsAdapter.removeOne(id, state)
+  ),
+
   on(removeSuccess, (state, {id}) =>
     contactsAdapter.removeOne(id, state)
   )

@@ -4,16 +4,24 @@ import * as fromContacts from '@app/contacts-store';
 import { select, Store } from '@ngrx/store';
 
 import { Contact } from '@app/core/models';
-import {create, load, loadAll, remove, update} from '@app/contacts-store/contacts-actions';
+import {create, filterResult, load, loadAll, remove, searchText, update} from '@app/contacts-store/contacts-actions';
 
 @Injectable()
 export class ContactsStoreFacade {
+
+  constructor(private store: Store<fromRoot.State>) { }
 
   contacts$ = this.store.pipe(
     select(fromContacts.getAllContacts)
   );
 
-  constructor(private store: Store<fromRoot.State>) { }
+  searchText(text: string) {
+    this.store.dispatch(searchText({text}));
+  }
+
+  filterResult( contacts: Contact[] ) {
+    this.store.dispatch(filterResult({ contacts }));
+  }
 
   loadAllContact() {
     this.store.dispatch(loadAll());

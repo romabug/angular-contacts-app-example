@@ -1,6 +1,17 @@
 import {createAction, props} from '@ngrx/store';
 import { Contact } from '@app/core/models';
 
+export const searchText = createAction(
+  '[Contacts] Search text',
+  props<{text: string}>()
+);
+
+export const filterResult = createAction(
+  '[Contacts] filter result',
+  props<{contacts: Contact[]}>()
+);
+
+
 export const loadAll = createAction(
   '[Contacts] Load all'
 );
@@ -19,6 +30,7 @@ export const update = createAction(
   '[Contacts] Update',
   props<{contact: Partial<Contact>}>()
 );
+
 
 export const remove = createAction(
   '[Contacts] Remove',

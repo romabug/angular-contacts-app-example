@@ -5,7 +5,8 @@ import {
   exhaustMap,
   map, pluck,
   startWith,
-  switchMap
+  switchMap,
+  tap
 } from 'rxjs/operators';
 import {Actions, createEffect, Effect, ofType} from '@ngrx/effects';
 import {ContactsService} from '../services/contacts.service';
@@ -75,6 +76,7 @@ export class ContactsEffects {
       map(contact => updateSuccess({contact}))
     ))
   ));
+
 
   destroy$ = createEffect( () => this.actions$.pipe(
     ofType(remove),
