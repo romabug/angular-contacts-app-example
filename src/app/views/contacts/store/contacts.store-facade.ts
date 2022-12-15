@@ -4,7 +4,7 @@ import * as fromContacts from '@app/contacts-store';
 import { select, Store } from '@ngrx/store';
 
 import { Contact } from '@app/core/models';
-import {create, load, remove, update} from '@app/contacts-store/contacts-actions';
+import {create, load, loadAll, remove, update} from '@app/contacts-store/contacts-actions';
 
 @Injectable()
 export class ContactsStoreFacade {
@@ -14,6 +14,11 @@ export class ContactsStoreFacade {
   );
 
   constructor(private store: Store<fromRoot.State>) { }
+
+  loadAllContact() {
+    this.store.dispatch(loadAll());
+  }
+
 
   loadContact(id: number) {
     this.store.dispatch(load({id}));

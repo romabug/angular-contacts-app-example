@@ -22,20 +22,16 @@ export class ContactsIndexComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.filterContact(null);
+   this.contactsFacade.loadAllContact();
+   this.filterContact(null);
   }
 
 
-  //filter contact logic
+  // filter contact logic
   filterContact(keyword: string): void {
     if (!keyword) {
       this.hightLightText = '';
-      this.newContacts$ = this.contacts$.pipe(
-        map(results => {
-          results.pop();
-          return results;
-        } )
-      );
+      this.newContacts$ = this.contacts$;
       return;
     }
 
@@ -57,6 +53,7 @@ export class ContactsIndexComponent implements OnInit {
 
   editContact(contact: Contact) {
     this.router.navigate(['/contacts', contact.id, 'edit']);
+
   }
 
   showContact(contact: Contact) {

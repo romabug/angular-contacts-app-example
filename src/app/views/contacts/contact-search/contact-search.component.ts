@@ -34,7 +34,6 @@ export class ContactSearchComponent implements OnInit {
       debounceTime(500),
       filter(num => num.length >= 2 || num.length === 0 ),
       tap( word => {
-        console.log(word);
         this.searchText.emit(word);
       } ),
     );

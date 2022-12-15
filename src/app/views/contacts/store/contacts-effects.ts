@@ -55,7 +55,7 @@ export class ContactsEffects {
   ));
 
 
-  create$ = createEffect( () =>this.actions$.pipe(
+  create$ = createEffect( () => this.actions$.pipe(
     ofType(create),
     pluck('contact'),
     switchMap( contact => this.contactsService.create(contact).pipe(
