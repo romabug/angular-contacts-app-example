@@ -31,7 +31,6 @@ export class ContactsIndexComponent implements OnInit {
   filterContact(keyword: string): void {
     if (!keyword) {
       this.hightLightText = '';
-      this.contactsFacade.searchText('');
       this.newContacts$ = this.contacts$;
       return;
     }
